@@ -124,7 +124,6 @@ def main():
         parser.print_help()
         sys.exit(0)
 
-    # Execute matched subcommand
     args.func(args)
 
 
