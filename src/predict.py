@@ -1,12 +1,3 @@
-"""
-Inference and Prediction Engine for Prompt Injection Detection.
-
-This module loads the trained feature pipeline and best classification model to perform:
-1. Single prompt classification with confidence calibration.
-2. Feature-level explainability (heuristic keyword hits, structural triggers, and TF-IDF terms).
-3. Interactive REPL loop in the terminal for real-time security probing.
-"""
-
 import os
 import json
 import re
