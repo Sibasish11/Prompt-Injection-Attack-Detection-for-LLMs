@@ -1,24 +1,3 @@
-"""
-Data Preprocessing and Exploratory Data Analysis (EDA) Module.
-
-This module handles:
-1. Dataset ingestion and structural validation.
-2. Text normalization (whitespace cleaning, lowercase normalization while preserving syntax).
-3. Joint stratification across both binary labels and attack categories.
-4. Generation and export of publication-grade EDA visualizations to the `reports/` directory.
-
-Design Rationale (Viva / Defense Notes):
-----------------------------------------
-- Punctuation Retention: Unlike standard NLP tasks (e.g., topic modeling or sentiment analysis)
-  where punctuation is routinely stripped, in prompt injection detection, punctuation patterns
-  (such as delimiters `---`, `###`, quotes `\"\"\"`, brackets `[]`, and braces `{}`) are strong
-  adversarial signals used by attackers to escape system prompt boundaries.
-- Joint Stratification: The dataset contains distinct attack modalities (`ignore`, `extraction`,
-  `persona`, `multilingual`). Stratifying on `label` alone could cause severe category imbalance
-  in the test split, leading to skewed evaluation metrics. Creating a composite stratification
-  key (`label_category`) guarantees identical distribution in both train and test splits.
-"""
-
 import os
 import re
 from typing import Tuple
