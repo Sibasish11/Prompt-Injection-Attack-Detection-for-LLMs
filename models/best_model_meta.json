@@ -1,0 +1,12 @@
+{
+    "best_model_name": "linear_svm",
+    "best_cv_f1": 0.9949,
+    "models_evaluated": [
+        "logistic_regression",
+        "linear_svm",
+        "random_forest",
+        "multinomial_nb",
+        "xgboost"
+    ],
+    "trained_timestamp": "2026-09-22 21:22:25"
+}

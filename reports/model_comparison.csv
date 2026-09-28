@@ -1,0 +1,6 @@
+Model,Accuracy,Precision (Inj),Recall (Inj),F1-Score (Inj),Macro F1,ROC-AUC,False Positives,False Negatives
+Linear Svm,99.55,99.4,99.7,99.55,99.55,0.9999,6,3
+Multinomial Nb,99.35,99.6,99.1,99.35,99.35,0.9999,4,9
+Logistic Regression,99.25,99.4,99.1,99.25,99.25,0.9998,6,9
+Random Forest,99.25,99.8,98.7,99.25,99.25,0.9999,2,13
+Xgboost,99.1,99.1,99.1,99.1,99.1,0.9995,9,9

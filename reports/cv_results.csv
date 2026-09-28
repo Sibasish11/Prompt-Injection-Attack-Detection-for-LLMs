@@ -1,0 +1,6 @@
+model_name,cv_accuracy,cv_precision,cv_recall,cv_f1,cv_roc_auc,train_fit_time_sec
+linear_svm,0.9949,0.9938,0.996,0.9949,0.9997,1.27
+random_forest,0.9925,0.9972,0.9877,0.9925,0.9998,1.31
+multinomial_nb,0.9921,0.993,0.9912,0.9921,0.9997,0.02
+logistic_regression,0.9919,0.9937,0.99,0.9919,0.9997,0.17
+xgboost,0.9895,0.9878,0.9912,0.9895,0.9995,4.33

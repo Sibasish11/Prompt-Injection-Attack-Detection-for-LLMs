@@ -1,0 +1,5 @@
+Category,Total Samples,Injections,Benign,Accuracy,Precision (Inj),Recall (Inj),F1-Score (Inj)
+multilingual,168,84,84,96.43,94.32,98.81,96.51
+persona,394,197,197,99.75,100.0,99.49,99.75
+extraction,504,252,252,99.6,99.6,99.6,99.6
+ignore,932,466,466,100.0,100.0,100.0,100.0
