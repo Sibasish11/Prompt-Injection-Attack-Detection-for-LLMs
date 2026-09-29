@@ -72,9 +72,6 @@ def train_and_cross_validate(
     random_state: int = 42
 ) -> Dict[str, Any]:
     """
-    Fits feature pipeline, runs 5-Fold Stratified CV across all models, fits on full train set,
-    and serializes all trained models.
-
     Parameters:
         train_csv (str): Path to data/train.csv
         test_csv (str): Path to data/test.csv
