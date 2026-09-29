@@ -1,26 +1,3 @@
-"""
-Model Training and Cross-Validation Module.
-
-This module trains and tunes 5 diverse machine learning classifiers on the
-extracted hybrid feature representation:
-1. Logistic Regression (L2 Regularized Generalized Linear Model)
-2. Linear Support Vector Machine (Linear SVM with Calibrated Probabilities via Platt Scaling)
-3. Random Forest (Bagged Non-Linear Decision Trees Ensemble)
-4. Multinomial Naive Bayes (Generative Feature-Likelihood Model)
-5. XGBoost (Gradient Boosted Extreme Decision Trees)
-
-Design Rationale & Viva Defense Notes:
---------------------------------------
-- Model Diversity: We evaluate a balance of linear models (LogReg, SVM), probabilistic generative
-  models (MultinomialNB), and tree-based non-linear ensembles (Random Forest, XGBoost).
-- Probability Calibration: Standard `LinearSVC` produces uncalibrated hinge loss distance margins.
-  By wrapping it in `CalibratedClassifierCV(estimator=LinearSVC(...), cv=3)`, we apply sigmoid
-  (Platt) scaling to yield true posterior probabilities P(Injection | X), essential for real-time
-  risk thresholding and CLI confidence scoring.
-- 5-Fold Stratified Cross-Validation: Prevents data leakage and provides unbiased estimates of out-of-fold
-  generalization performance before final training on the full training partition.
-"""
-
 import os
 import json
 import time
