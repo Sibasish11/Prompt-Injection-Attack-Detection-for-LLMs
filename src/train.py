@@ -19,7 +19,7 @@ from src.features import PromptInjectionFeaturePipeline
 
 def get_model_definitions(random_state: int = 42) -> Dict[str, Any]:
     """
-    Initializes and returns dictionary of the 5 candidate ML classifiers.
+    Initializes and returns dictionary of the 5 candidate ML classifiers and validates.
     """
     return {
         "logistic_regression": LogisticRegression(
