@@ -1,26 +1,3 @@
-"""
-Feature Engineering Module for Prompt Injection Detection.
-
-This module combines two complementary feature representations:
-1. N-Gram TF-IDF Vectorization:
-   - Captures contextual lexical patterns and sub-phrases across unigrams, bigrams,
-     and trigrams (e.g., 'ignore previous instructions', 'system prompt', 'developer mode').
-2. Domain-Specific Handcrafted Heuristics:
-   - Quantifies structural, syntactic, and adversarial signals that raw n-grams might miss,
-     such as keyword frequencies, special character densities, delimiter frequency,
-     base64 obfuscation patterns, and non-ASCII multilingual markers.
-
-Design Rationale (Viva / Defense Notes):
-----------------------------------------
-- Why Hybrid Features? Pure TF-IDF struggles when attackers use obfuscation, novel phrasing,
-  or non-standard syntactic delimiters (`---`, `###`, base64). Handcrafted statistical and
-  rule-based features provide orthogonal inductive bias, allowing classical linear and tree-based
-  classifiers to catch structural attacks even when unfamiliar n-grams appear.
-- MaxAbsScaler for Sparse Stacking: Dense handcrafted features are scaled using `MaxAbsScaler`
-  so their magnitudes align with unit-norm TF-IDF scores without densifying the sparse matrix
-  (preserving O(N) memory efficiency).
-"""
-
 import os
 import re
 from typing import List, Tuple, Union, Optional
