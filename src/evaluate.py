@@ -1,25 +1,3 @@
-"""
-Model Evaluation and Error Analysis Module.
-
-This module evaluates all trained models on the unseen hold-out test set (20% partition),
-producing comprehensive security metrics, confusion matrices, ROC/PR curves, category-level
-recall breakdowns, and granular false positive / false negative error analysis logs.
-
-Key Security Evaluation Concepts (Viva Defense):
-------------------------------------------------
-1. Injection Class Recall (True Positive Rate):
-   - In AI security guardrails, Recall is paramount: a False Negative (FN) means an attacker's
-     malicious payload bypassed the filter to reach the LLM, potentially causing data leaks,
-     instruction overrides, or jailbreaks.
-2. Injection Class Precision (Alert Fidelity):
-   - High Precision prevents user friction and false alarms on legitimate prompts that happen
-     to discuss AI ethics, roleplay, or coding instructions.
-3. Category-Specific Breakdown:
-   - Evaluates whether the classifier performs equally well across diverse attack vectors
-     (`ignore`, `extraction`, `persona`, `multilingual`). Multilingual and extraction attacks
-     often exhibit unique syntactic distributions that standard keyword filters miss.
-"""
-
 import os
 import json
 from typing import Dict, Any, List, Tuple
