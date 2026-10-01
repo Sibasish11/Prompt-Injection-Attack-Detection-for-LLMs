@@ -10,7 +10,7 @@ from src.predict import run_predict_cli
 
 
 def cmd_preprocess(args):
-    """Executes the preprocessing and EDA stage."""
+ 
     print("\n" + "=" * 70)
     print(" >>> STEP 1: PREPROCESSING & EXPLORATORY DATA ANALYSIS (EDA)")
     print("=" * 70)
