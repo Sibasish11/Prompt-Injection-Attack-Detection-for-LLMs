@@ -2,8 +2,6 @@ import sys
 from src.predict import PromptInjectionPredictor
 
 # ==============================================================================
-# CURATED BENCHMARK TEST SUITE
-# ==============================================================================
 DEMO_PROMPTS = [
     # --------------------------------------------------------------------------
     # 1. INSTRUCTION OVERRIDE & NEGATION ATTACKS ('ignore')
