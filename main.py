@@ -25,7 +25,7 @@ def cmd_preprocess(args):
 
 
 def cmd_train(args):
-    """Executes the feature engineering, 5-fold CV, and model training stage."""
+    
     print("\n" + "=" * 70)
     print(" >>> STEP 2: FEATURE ENGINEERING & MODEL TRAINING (5-FOLD CV)")
     print("=" * 70)
