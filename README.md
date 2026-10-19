@@ -1,32 +1,18 @@
 # Prompt Injection Attack Detection for LLMs Using ML Techniques (Classification)
 
-A self-contained, high-throughput, classical machine learning pipeline for real-time detection of **Prompt Injection and Jailbreak Attacks** against Large Language Models (LLMs). Built on the 9,990-sample balanced **Mirror Prompt Injection Dataset**, this solution extracts hybrid n-gram and handcrafted lexical heuristics to achieve **99.55% F1-Score** and **99.70% Recall** with **sub-millisecond (<2ms)** inference latency — requiring **0 external API calls** and **0 heavy GPU dependencies**.
-
----
-
-## 📌 Table of Contents
-1. [Project Overview](#-project-overview)
-2. [Threat Model & Attack Taxonomy](#-threat-model--attack-taxonomy)
-3. [Architecture & Feature Pipeline](#-architecture--feature-pipeline)
-4. [Project Structure](#-project-structure)
-5. [Installation & Setup](#-installation--setup)
-6. [CLI Usage Guide](#-cli-usage-guide)
-7. [Empirical Benchmark Results](#-empirical-benchmark-results)
-8. [Category-Wise Performance & Error Analysis](#-category-wise-performance--error-analysis)
-9. [Viva / Technical Defense Guide](#-viva--technical-defense-guide)
+This is a classical machine learning pipeline for real time detection of **Prompt Injection and Jailbreak Attacks** against Large Language Models (LLMs). Built on the 9,990 sample balanced **Mirror Prompt Injection Dataset**, this solution extracts hybrid n gram and handcrafted lexical heuristics to achieve **99.55% F1-Score** and **99.70% Recall** with **sub-millisecond (<2ms)** inference latency : requiring **0 external API calls** and **0 heavy GPU dependencies**.
 
 ---
 
 ## 🚀 Project Overview
 
-Large Language Model applications (e.g., retrieval-augmented generation agents, chatbots, tool-calling systems) are inherently vulnerable to **Prompt Injection Attacks** — malicious user prompts engineered to override system instructions, exfiltrate private prompts, or bypass ethical alignment.
+Large Language Model applications (e.g., retrieval augmented generation agents, chatbots, tool calling systems) are inherently vulnerable to **Prompt Injection Attacks** : malicious user prompts engineered to override system instructions, exfiltrate private prompts, or bypass ethical alignment.
 
 While traditional defenses often deploy secondary LLM guardrails (e.g., Llama Guard), such approaches suffer from **severe latency overhead (300ms–1500ms)**, **token costs**, and **recursive vulnerability** to jailbreaks.
 
 This project implements a classical ML approach:
-- **Offline & Self-Contained:** Runs locally on CPU with zero cloud or API dependencies.
-- **Ultra-Low Latency:** Inference executes in **<2ms**, enabling high-throughput pre-inference request filtering.
-- **Calibrated Probabilities:** Utilizes Platt-calibrated decision functions to output true confidence percentages for risk thresholding.
+- **Offline & Self Contained:** Runs locally on CPU with zero cloud or API dependencies.
+- **Ultra-Low Latency:** Inference executes in **<2ms**, enabling high throughput pre inference request filtering.
 - **Explainable Predictions:** Pinpoints matched trigger phrases, structural delimiter escapes, and obfuscation patterns in the terminal.
 
 ---
@@ -85,7 +71,7 @@ The system utilizes a **Hybrid Feature Representation** combining statistical sp
             └──────────────────────────────────────────────────┘
 ```
 
-### Why Handcrafted Features Matter:
+### Handcrafted Features Matter here btw:
 - **Punctuation & Delimiters:** Attackers use structural markdown tokens (`---`, `###`, ```` ``, `[INST]`) to emulate prompt frame boundaries. Retaining and counting these tokens provides critical structural signal.
 - **Base64 Detection:** Detects obfuscated encoded payloads of high entropy or explicit padding before execution.
 - **Imperative Keywords:** Scans for 50+ domain-specific trigger phrases across English, French, Spanish, and German.
@@ -97,15 +83,15 @@ The system utilizes a **Hybrid Feature Representation** combining statistical sp
 ```
 prompt-injection-detector/
 ├── data/
-│   ├── mirror-prompt-injection.csv   # Full 9,990-sample benchmark dataset
+│   ├── mirror-prompt-injection.csv   # Full based 9,990 sample benchmark dataset
 │   ├── train.csv                     # Stratified 80% train split (7,992 rows)
 │   └── test.csv                      # Stratified 20% test split (1,998 rows)
 ├── src/
 │   ├── __init__.py                   # Package initialization
 │   ├── preprocess.py                 # Text normalization, joint stratification & EDA plots
 │   ├── features.py                   # N-gram TF-IDF & handcrafted heuristic extractor
-│   ├── train.py                      # 5-fold CV training and serialization for 5 ML models
-│   ├── evaluate.py                   # Multi-metric evaluation, error analysis & category metrics
+│   ├── train.py                     
+│   ├── evaluate.py                   # for multimetric evaluation, error analysis & category metrics
 │   └── predict.py                    # Inference engine, explainability & interactive REPL
 ├── models/
 │   ├── best_model.joblib             # Serialized top model (Linear SVM)
@@ -122,14 +108,14 @@ prompt-injection-detector/
 │   ├── eda_category_distribution.png # Attack categories by label
 │   ├── eda_top_ngrams.png            # Distinctive n-grams per class
 │   ├── confusion_matrices.png        # Confusion matrices across all 5 models
-│   ├── roc_pr_curves.png             # Combined ROC and Precision-Recall curves
-│   ├── cv_results.csv                # 5-Fold cross-validation benchmark
-│   ├── model_comparison.csv          # Hold-out test set comparison table
-│   ├── category_breakdown.csv        # Per-category recall and precision metrics
+│   ├── roc_pr_curves.png             # Combined ROC and Precision Recall curves
+│   ├── cv_results.csv                
+│   ├── model_comparison.csv          # Hold out test set comparison table
+│   ├── category_breakdown.csv        # Per category recall and precision metrics
 │   └── errors.csv                    # Granular log of false positives & false negatives
 ├── requirements.txt                  # Pinned Python package dependencies
 ├── README.md                         # Comprehensive documentation
-└── main.py                           # Top-level CLI entry point
+└── main.py                           # Top level CLI entry point
 ```
 
 ---
@@ -214,7 +200,7 @@ python main.py predict "What is the capital of France?"
 ```
 
 ### 6. Interactive Terminal REPL Mode
-Opens a real-time prompt testing shell where you can type prompts continuously:
+Opens a real time prompt testing shell where yo can type prompts continuously:
 ```bash
 python main.py predict --interactive
 ```
@@ -223,7 +209,7 @@ python main.py predict --interactive
 
 ## 📊 Empirical Benchmark Results
 
-### 1. 5-Fold Cross-Validation Performance (Training Set: 7,992 Samples)
+### 1. 5 Fold Cross Validation Performance (Training Set: 7,992 Samples)
 
 | Model | CV Accuracy | CV Precision | CV Recall | CV F1-Score | CV ROC-AUC | Fit Time |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -235,7 +221,7 @@ python main.py predict --interactive
 
 ---
 
-### 2. Hold-Out Test Set Performance (Unseen: 1,998 Samples)
+### 2. Hold Out Test Set Performance (Unseen: 1,998 Samples)
 
 | Rank | Model Architecture | Accuracy | Precision (Inj) | Recall (Inj) | F1-Score (Inj) | Macro F1 | ROC-AUC | False Positives | False Negatives |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -247,7 +233,7 @@ python main.py predict --interactive
 
 ---
 
-## 🔍 Category-Wise Performance & Error Analysis
+## 🔍 Category Wise Performance & Error Analysis
 
 ### Performance by Attack Category (Best Model: Linear SVM)
 
@@ -268,28 +254,3 @@ python main.py predict --interactive
 
 ---
 
-## 🎓 Viva / Technical Defense Guide
-
-### Q1: Why use Classical ML instead of a fine-tuned Transformer or LLM guardrail?
-> **Answer:** 
-> 1. **Latency & Throughput:** Classical linear models and TF-IDF execute in **<2 milliseconds** on standard CPU, whereas LLM guardrails introduce 300ms–1500ms of latency per request.
-> 2. **Operational Cost:** Zero GPU requirements and zero token API costs.
-> 3. **Deterministic Boundary:** LLM guardrails are themselves vulnerable to adversarial jailbreaks and recursive prompt injection; classical ML provides a hard mathematical hyperplane boundary.
-
-### Q2: Why keep punctuation during preprocessing?
-> **Answer:** Punctuation is an adversarial signal in prompt injection. Attackers frequently use delimiter sequences (`---`, `###`, `````, `"""`) and brackets to simulate prompt frames or escape instructions. Stripping punctuation would eliminate these crucial structural boundary signals.
-
-### Q3: Why is Joint Stratification (`label` + `category`) necessary?
-> **Answer:** The dataset contains imbalanced attack categories (`ignore`: 4,660 vs. `multilingual`: 840). Stratifying on `label` alone risks partition variance where rarer categories are underrepresented in the test split. Joint stratification guarantees identical class and category proportions across both partitions.
-
-### Q4: Why does Linear SVM outperform tree-based models like Random Forest and XGBoost?
-> **Answer:** Text classification with n-gram TF-IDF creates a high-dimensional (5,000+ features), sparse feature space. Linear SVMs with $L_2$ regularization find the maximum-margin hyperplane in high-dimensional spaces without overfitting, whereas axis-aligned decision trees require deep partitioning to isolate sparse combinations of words.
-
-### Q5: How are probabilities generated for Linear SVM?
-> **Answer:** Standard `LinearSVC` optimizes hinge loss, which yields distance from the decision boundary rather than calibrated probabilities. We wrap `LinearSVC` inside `CalibratedClassifierCV(cv=3)`, which applies Platt scaling (a logistic sigmoid fit over out-of-fold decision margins) to generate true posterior probabilities $P(y=1|X)$.
-
----
-
-## 📜 License & Acknowledgments
-- **Dataset:** Mirror Prompt Injection Dataset (`watchdogsrox/Mirror-Prompt-Injection-Dataset`).
-- **Frameworks:** Python, Scikit-Learn, XGBoost, Pandas, Matplotlib, Seaborn, Joblib.
